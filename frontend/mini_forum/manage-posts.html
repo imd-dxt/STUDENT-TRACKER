@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Posts</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Student Track</div>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="performance.html">Performance</a>
+                <a href="all-posts.html">Posthub</a>
+                <a href="manage-posts.html">Manage Posts</a>
+                <a href="../backend/logout.php">Logout</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Manage Posts</h1>
+        <div id="posts-container"></div>
+        <h2>Create a New Post</h2>
+        <textarea id="post-content" placeholder="Write something..."></textarea>
+        <button onclick="createPost()">Create Post</button>
+    </main>
+    <script src="manage-posts.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Student Track</div>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="performance.html">Performance</a>
+                <a href="all-posts.html">Posthub</a>
+                <a href="manage-posts.html">Manage Posts</a>
+                <a href="../backend/logout.php">Logout</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Post</h1>
+        <div class="post-section" id="post-container"></div>
+        <h2>Comments</h2>
+        <div class="comments-section" id="comments-container"></div>
+        <div class="comment-form-container">
+        <textarea id="comment-content" placeholder="Write a comment..."></textarea>
+        <button class="add-button" id="add-comment-button">Add Comment</button>
+        </div>
+    </main>
+    <script src="post.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+            document.getElementById('add-comment-button').onclick = function() {
+                createComment(postId);
+            };
+        });
+    </script>
+</body>
+</html>

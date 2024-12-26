@@ -4,36 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Tracker - Performance</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="performance.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
-        <h1>Student Performance Tracker</h1>
+        <nav class="container">
+            <div class="logo">Student Track</div>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="performance.html">Performance</a>
+                <a href="all-posts.html">Posthub</a>
+                <a href="manage-posts.html">Manage Posts</a>
+                <a href="../backend/logout.php">Logout</a>
+            </div>
+        </nav>
     </header>
-    <main>
-        <h2>Submit Performance</h2>
-        <form id="grade-form">
-            <div>
-                <label for="title">Title</label>
-                <input type="text" id="title" name="title" required>
-            </div>
-            <div>
-                <label for="subject">Subject</label>
-                <input type="text" id="subject" name="subject" required>
-            </div>
-            <div>
-                <label for="grade">Grade</label>
-                <input type="number" id="grade" name="grade" step="0.01" required>
-            </div>
-            <div>
-                <label for="submitted_at">Submission Date</label>
-                <input type="date" id="submitted_at" name="submitted_at" required>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+    <main class="container">
+        <h1>Student Performance Tracker</h1>
+        <div class="content-wrapper">
+            <section class="form-section">
+                <h2>Submit Performance</h2>
+                <form id="grade-form">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="grade">Grade</label>
+                        <input type="number" id="grade" name="grade" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="submitted_at">Submission Date</label>
+                        <input type="date" id="submitted_at" name="submitted_at" required>
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </section>
 
-        <h2>Performance Data</h2>
-        <div id="performance-chart"></div>
+            <section class="performance-section">
+                <h2>Performance Data</h2>
+                <div class="chart-container">
+                    <canvas id="performance-chart"></canvas>
+                </div>
+                <div id="performance-list" class="performance-list"></div>
+            </section>
+        </div>
     </main>
 
     <footer>
@@ -41,84 +61,146 @@
     </footer>
 
     <script>
-        document.getElementById('grade-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const title = document.getElementById('title').value;
-            const subject = document.getElementById('subject').value;
-            const grade = document.getElementById('grade').value;
-            const submitted_at = document.getElementById('submitted_at').value;
-            
-            fetch('http://localhost/STUDENT-TRACKER/backend/performance.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-                body: JSON.stringify({ title, subject, grade, submitted_at })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Grade submitted successfully');
-                    loadPerformanceData();
-                } else {
-                    alert('Failed to submit grade');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+document.addEventListener('DOMContentLoaded', function() {
+    const gradeForm = document.getElementById('grade-form');
+    const performanceList = document.getElementById('performance-list');
+    const ctx = document.getElementById('performance-chart').getContext('2d');
+    let chart;
+
+    gradeForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const title = document.getElementById('title').value;
+        const subject = document.getElementById('subject').value;
+        const grade = document.getElementById('grade').value;
+        const submitted_at = document.getElementById('submitted_at').value;
+        
+        fetch('http://localhost/STUDENT-TRACKER/backend/performance.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({ title, subject, grade, submitted_at })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Grade submitted successfully');
+                gradeForm.reset();
+                loadPerformanceData();
+            } else {
+                alert('Failed to submit grade');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
+    });
 
-        function loadPerformanceData() {
-            fetch('http://localhost/STUDENT-TRACKER/backend/performance.php', { credentials: 'include' })
-                .then(response => response.json())
-                .then(data => {
-                    const performanceChart = document.getElementById('performance-chart');
-                    performanceChart.innerHTML = '';
-                    
-                    if (data.message) {
-                        performanceChart.textContent = data.message;
-                    } else {
-                        data.forEach(item => {
-                            const div = document.createElement('div');
-                            div.classList.add('performance-item');
-                            div.innerHTML = `
-                                <p>${item.title} (${item.subject}): ${item.grade}</p>
-                                <button onclick="deleteAssignment(${item.id})">Delete</button>
-                            `;
-                            performanceChart.appendChild(div);
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-
-        function deleteAssignment(id) {
-            fetch(`http://localhost/STUDENT-TRACKER/backend/performance.php?id=${id}`, {
-                method: 'DELETE',
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
-                body: JSON.stringify({ id })
-            })
+    function loadPerformanceData() {
+        fetch('http://localhost/STUDENT-TRACKER/backend/performance.php', { credentials: 'include' })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
-                    alert('Assignment deleted successfully');
-                    loadPerformanceData();
+                performanceList.innerHTML = '';
+                
+                if (data.message) {
+                    performanceList.textContent = data.message;
                 } else {
-                    alert('Failed to delete assignment');
+                    data.forEach(item => {
+                        const div = document.createElement('div');
+                        div.classList.add('performance-item');
+                        div.innerHTML = `
+                            <p>${item.title} (${item.subject}): ${item.grade}</p>
+                            <button class="delete-btn" onclick="deleteAssignment(${item.id})">Delete</button>
+                        `;
+                        performanceList.appendChild(div);
+                    });
+                    updateChart(data);
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
             });
+    }
+
+    function deleteAssignment(id) {
+        fetch(`http://localhost/STUDENT-TRACKER/backend/performance.php?id=${id}`, {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Assignment deleted successfully');
+                loadPerformanceData();
+            } else {
+                alert('Failed to delete assignment');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function updateChart(data) {
+        const sortedData = data.sort((a, b) => new Date(a.submitted_at) - new Date(b.submitted_at));
+        const labels = sortedData.map(item => item.submitted_at);
+        const grades = sortedData.map(item => item.grade);
+
+        if (chart) {
+            chart.destroy();
         }
-        loadPerformanceData();
+
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Grades',
+                    data: grades,
+                    borderColor: '#6C63FF',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+    }
+
+    loadPerformanceData();
+});
+
+// Make deleteAssignment function global so it can be called from inline onclick
+window.deleteAssignment = function(id) {
+    fetch(`http://localhost/STUDENT-TRACKER/backend/performance.php?id=${id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Assignment deleted successfully');
+            loadPerformanceData();
+        } else {
+            alert('Failed to delete assignment');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+};
     </script>
 </body>
 </html>

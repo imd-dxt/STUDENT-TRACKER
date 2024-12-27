@@ -30,7 +30,7 @@ body {
 }
 
 header {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: fixed;
@@ -53,6 +53,12 @@ nav {
     color: var(--primary-color);
     text-transform: uppercase;
     letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+}
+
+.logo i {
+    margin-right: 10px;
 }
 
 .nav-links {
@@ -66,6 +72,12 @@ nav {
     transition: color 0.3s ease, transform 0.3s ease;
     font-weight: 500;
     position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a i {
+    margin-right: 5px;
 }
 
 .nav-links a::after {
@@ -90,7 +102,7 @@ nav {
 }
 
 main {
-    padding-top: 180px; /* Increased from 100px */
+    padding-top: 180px;
     min-height: calc(100vh - 60px);
 }
 
@@ -104,6 +116,13 @@ h1, h2 {
     margin-bottom: 2rem;
     font-weight: 600;
     color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 i, h2 i {
+    margin-right: 10px;
 }
 
 h1 {
@@ -129,6 +148,18 @@ h2 {
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.posts-container > div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
 }
 
 .posts-container > div:hover {
@@ -152,6 +183,7 @@ h2 {
     color: var(--text-color);
     opacity: 0.7;
     margin-bottom: 1rem;
+    font-style: italic;
 }
 
 .posts-container button {
@@ -163,6 +195,14 @@ h2 {
     cursor: pointer;
     font-weight: 600;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+}
+
+.posts-container button i {
+    margin-right: 5px;
 }
 
 .posts-container button:hover {
@@ -187,10 +227,18 @@ h2 {
     border-radius: 5px;
     resize: vertical;
     font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+#post-content:focus {
+    outline: none;
+    border-color: var(--primary-color);
 }
 
 .create-btn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     padding: 1rem;
     background-color: var(--secondary-color);
@@ -201,6 +249,10 @@ h2 {
     font-size: 1rem;
     font-weight: 600;
     transition: all 0.3s ease;
+}
+
+.create-btn i {
+    margin-right: 10px;
 }
 
 .create-btn:hover {
@@ -225,3 +277,4 @@ h2 {
         grid-template-columns: 1fr;
     }
 }
+

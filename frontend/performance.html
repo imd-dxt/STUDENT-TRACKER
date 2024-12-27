@@ -6,25 +6,27 @@
     <title>Student Tracker - Performance</title>
     <link rel="stylesheet" href="performance.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
         <nav class="container">
             <div class="logo">Student Track</div>
             <div class="nav-links">
-                <a href="dashboard.html">Dashboard</a>
-                <a href="performance.html">Performance</a>
-                <a href="all-posts.html">Posthub</a>
-                <a href="manage-posts.html">Manage Posts</a>
-                <a href="../backend/logout.php">Logout</a>
+                <a href="../dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="performance.html"><i class="fas fa-chart-line"></i> Performance</a>
+                <a href="all-posts.html"><i class="fas fa-globe"></i> Posthub</a>
+                <a href="../backend/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="../calender/calender.html"><i class="fas fa-calendar-alt"></i> Calendar</a>
+                <a href="../resources/resources.html"><i class="fas fa-book"></i> Resources</a>
             </div>
         </nav>
     </header>
     <main class="container">
-        <h1>Student Performance Tracker</h1>
+        <h1 class="page-title">Student Performance Tracker</h1>
         <div class="content-wrapper">
             <section class="form-section">
-                <h2>Submit Performance</h2>
+                <h2><i class="fas fa-chart-line"></i> Submit Performance</h2>
                 <form id="grade-form">
                     <div class="form-group">
                         <label for="title">Title</label>
@@ -42,12 +44,12 @@
                         <label for="submitted_at">Submission Date</label>
                         <input type="date" id="submitted_at" name="submitted_at" required>
                     </div>
-                    <button type="submit">Submit</button>
+                    <button type="submit" class="cta-button">Submit</button>
                 </form>
             </section>
 
             <section class="performance-section">
-                <h2>Performance Data</h2>
+                <h2><i class="fas fa-chart-bar"></i> Performance Data</h2>
                 <div class="chart-container">
                     <canvas id="performance-chart"></canvas>
                 </div>
@@ -57,7 +59,9 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Student Tracker. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2024 Student Tracker. All rights reserved.</p>
+        </div>
     </footer>
 
     <script>
@@ -180,7 +184,6 @@ document.addEventListener('DOMContentLoaded', function() {
     loadPerformanceData();
 });
 
-// Make deleteAssignment function global so it can be called from inline onclick
 window.deleteAssignment = function(id) {
     fetch(`http://localhost/STUDENT-TRACKER/backend/performance.php?id=${id}`, {
         method: 'DELETE',

@@ -5,29 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Posts</title>
     <link rel="stylesheet" href="manage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
         <nav class="container">
-            <div class="logo">Student Track</div>
+            <div class="logo"><i class="fas fa-graduation-cap"></i> Student Track</div>
             <div class="nav-links">
-                <a href="dashboard.html">Dashboard</a>
-                <a href="performance.html">Performance</a>
-                <a href="all-posts.html">Posthub</a>
-                <a href="manage-posts.html">Manage Posts</a>
-                <a href="../backend/logout.php">Logout</a>
+                <a href="../dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="performance.html"><i class="fas fa-chart-line"></i> Performance</a>
+                <a href="all-posts.html"><i class="fas fa-globe"></i> Posthub</a>
+                <a href="../backend/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="../calender/calender.html"><i class="fas fa-calendar-alt"></i> Calendar</a>
+                <a href="../resources/resources.html"><i class="fas fa-book"></i> Resources</a>
             </div>
         </nav>
     </header>
     <main class="container">
-        <h1>Manage Posts</h1>
+        <h1><i class="fas fa-pencil-alt"></i> Manage Posts</h1>
         <div id="posts-container" class="posts-container"></div>
         <div class="create-post">
-            <h2>Create a New Post</h2>
+            <h2><i class="fas fa-plus-circle"></i> Create a New Post</h2>
             <textarea id="post-content" placeholder="Write something..."></textarea>
-            <button onclick="createPost()" class="create-btn">Create Post</button>
+            <button onclick="createPost()" class="create-btn"><i class="fas fa-paper-plane"></i> Create Post</button>
         </div>
     </main>
     <script src="manage-posts.js"></script>
 </body>
 </html>
+

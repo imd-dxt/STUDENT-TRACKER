@@ -5,38 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Calendar</title>
     <link rel="stylesheet" href="calender.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
 </head>
 <body>
     <header>
-        <nav>
-            <div class="logo">Student Tracker</div>
+        <nav class="container">
+            <div class="logo"><i class="fas fa-graduation-cap"></i> Student Track</div>
             <div class="nav-links">
-                <a href="dashboard.html">Dashboard</a>
-                <a href="performance.html">Performance</a>
-                <a href="all-posts.html">Posthub</a>
-                <a href="manage-posts.html">Manage Posts</a>
-                <a href="../backend/logout.php">Logout</a>
+                <a href="../dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="../performance.html"><i class="fas fa-chart-line"></i> Performance</a>
+                <a href="all-posts.html"><i class="fas fa-globe"></i> Posthub</a>
+                <a href="../backend/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="../calender/calender.html"><i class="fas fa-calendar-alt"></i> Calendar</a>
+                <a href="../resources/resources.html"><i class="fas fa-book"></i> Resources</a>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <main class="container">
         <h1 class="page-title">Student Calendar</h1>
-        <form id="eventForm" class="event-form">
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required><br>
-
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" required></textarea><br>
-
-            <label for="event_date">Event Date:</label>
-            <input type="date" id="event_date" name="event_date" required><br>
-
-            <button type="submit">Add Event</button>
-        </form>
-
-        <h2 class="section-title">Events</h2>
-        <ul id="eventList" class="event-list"></ul>
-    </div>
+        <div class="calendar-layout">
+            <div class="calendar-container">
+                <div id="calendar"></div>
+            </div>
+            <div class="events-container">
+                <form id="eventForm" class="event-form">
+                    <h2 class="section-title">Add New Event</h2>
+                    <div class="form-group">
+                        <label for="title">Title:</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="event_date">Event Date:</label>
+                        <input type="date" id="event_date" name="event_date" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Event</button>
+                </form>
+                <div class="event-list-container">
+                    <h2 class="section-title">Upcoming Events</h2>
+                    <ul id="eventList" class="event-list"></ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 StudentTrack. All rights reserved.</p>
+        </div>
+    </footer>
     <script src="calender.js"></script>
 </body>
 </html>
+

@@ -5,22 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Resources</title>
     <link rel="stylesheet" href="resources.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <h1>Student Resources</h1>
+    <header>
+        <nav class="container">
+            <div class="logo"><i class="fas fa-graduation-cap"></i> Student Track</div>
+            <div class="nav-links">
+                <a href="../dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="performance.html"><i class="fas fa-chart-line"></i> Performance</a>
+                <a href="all-posts.html"><i class="fas fa-globe"></i> Posthub</a>
+                <a href="../backend/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="../calender/calender.css"><i class="fas fa-calendar-alt"></i>Calendar</a>
+                <a href="../resources/resources.html"><i class="fas fa-book"></i> Resources</a>
+            </div>
+        </nav>
+    </header>
 
-    <form id="uploadForm" enctype="multipart/form-data">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required>
-        <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" required>
-        <label for="resource">Upload Resource (PDF only):</label>
-        <input type="file" id="resource" name="resource" accept="application/pdf" required>
-        <button type="submit">Upload</button>
-    </form>
+    <main class="container">
+        <h1>Student Resources</h1>
 
-    <h2>Uploaded Resources</h2>
-    <ul id="resourceList"></ul>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="resource">Upload Resource (PDF only):</label>
+                <input type="file" id="resource" name="resource" accept="application/pdf" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload Resource</button>
+        </form>
+
+        <h2>Uploaded Resources</h2>
+        <ul id="resourceList" class="resource-list"></ul>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 StudentTrack. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="resources.js"></script>
 </body>

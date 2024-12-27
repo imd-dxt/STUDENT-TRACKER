@@ -15,3 +15,4 @@ document.getElementById('register-form').addEventListener('submit', function(eve
         console.error('Error:', error);
     });
 });
+

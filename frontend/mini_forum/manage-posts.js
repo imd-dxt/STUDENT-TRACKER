@@ -18,17 +18,17 @@ function fetchPosts() {
             data.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.innerHTML = `
-                    <h3>${post.name}</h3>
-                    <p>${post.content}</p>
-                    <small>${new Date(post.created_at).toLocaleString()}</small>
-                    
-                    <button onclick="deletePost(${post.id})">Delete</button>
+                    <h3><i class="fas fa-user-circle"></i> ${post.name}</h3>
+                    <p><i class="fas fa-quote-left"></i> ${post.content}</p>
+                    <small><i class="far fa-clock"></i> ${new Date(post.created_at).toLocaleString()}</small>
+                    <button onclick="deletePost(${post.id})"><i class="fas fa-trash-alt"></i> Delete</button>
                 `;
                 container.appendChild(postElement);
             });
         })
         .catch(error => console.error('Error fetching posts:', error));
 }
+
 
 function createPost() {
     console .log('Creating post');

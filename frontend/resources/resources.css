@@ -56,6 +56,9 @@ nav {
     align-items: center;
     padding: 1rem 0;
 }
+.btn-sm{
+    margin-top: 20px;
+}
 
 .logo {
     font-size: 1.75rem;
@@ -183,6 +186,7 @@ input[type="file"]:focus {
 .btn-secondary {
     background-color: var(--secondary-color);
     color: white;
+    text-decoration: none;
 }
 
 .btn-danger {

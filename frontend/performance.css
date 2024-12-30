@@ -44,7 +44,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
+    padding: 1rem 0;
 }
 
 .logo {
@@ -54,7 +54,10 @@ nav {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
-
+.logo-link {
+    color: var(--primary-color);
+    text-decoration: none;
+}
 .nav-links {
     display: flex;
     gap: 1.5rem;

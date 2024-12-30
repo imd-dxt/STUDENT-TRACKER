@@ -60,7 +60,10 @@ nav {
 .logo i {
     margin-right: 10px;
 }
-
+.logo-link {
+    color: var(--primary-color);
+    text-decoration: none;
+}
 .nav-links {
     display: flex;
     gap: 1.5rem;

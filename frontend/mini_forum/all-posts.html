@@ -4,55 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Posts</title>
-    <link rel="stylesheet" href="all-posts.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
 </head>
 <body>
     <header>
         <nav class="container">
-            <div class="logo"><i class="fas fa-graduation-cap"></i> Student Track</div>
+            <div class="logo">
+                <a href="../landing_page.html" class="logo-link"><i class="fas fa-graduation-cap"></i> Student Track</a>
+            </div>
             <div class="nav-links">
                 <a href="../dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
-                <a href="performance.html"><i class="fas fa-chart-line"></i> Performance</a>
-                <a href="all-posts.html"><i class="fas fa-globe"></i> Posthub</a>
+                <a href="all-posts.html" class="active"><i class="fas fa-globe"></i> Posthub</a>
                 <a href="manage-posts.html"><i class="fas fa-tasks"></i> Manage Posts</a>
                 <a href="../backend/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                <a href="../calender/calender.html"><i class="fas fa-calendar-alt"></i> Calendar</a>
-                <a href="../resources/resources.html"><i class="fas fa-book"></i> Resources</a>
             </div>
         </nav>
     </header>
-
     <main class="container">
-        <h1>All Posts</h1>
+        <h1><i class="fas fa-file-alt"></i> All Posts</h1>
         <div id="posts-container" class="posts-container"></div>
     </main>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        fetchPosts();
-    });
-    
-    function fetchPosts() {
-        fetch('http://localhost/STUDENT-TRACKER/backend/mini_forum/get_posts.php')
-            .then(response => response.json())
-            .then(data => {
-                const container = document.getElementById('posts-container');
-                container.innerHTML = '';
-                data.forEach(post => {
-                    const postElement = document.createElement('div');
-                    postElement.classList.add('post');
-                    postElement.innerHTML = `
-                        <h3 class="post-title" >${post.name}</h3>
-                        <p class="post-content" >${post.content}</p>
-                        <small class="post-timestamp">${new Date(post.created_at).toLocaleString()}</small>
-                        <a class= "view" href="post.html?id=${post.id}">View Comments</a>
-                    `;
-                    container.appendChild(postElement);
-                });
-            })
-            .catch(error => console.error('Error fetching posts:', error));
-    }
+document.addEventListener('DOMContentLoaded', function() {
+  fetchPosts();
+});
+
+function fetchPosts() {
+  fetch('http://localhost/STUDENT-TRACKER/backend/mini_forum/get_posts.php')
+    .then(response => response.json())
+    .then(data => {
+      const container = document.getElementById('posts-container');
+      container.innerHTML = '';
+      data.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.classList.add('post');
+        postElement.innerHTML = `
+          <h3><i class="fas fa-user-circle"></i> ${post.name}</h3>
+          <p>${post.content}</p>
+          <small><i class="far fa-clock"></i> ${new Date(post.created_at).toLocaleString()}</small>
+          <div class="post-actions">
+            <a href="post.html?id=${post.id}" class="post-action comment"><i class="far fa-comment"></i> Comment</a>
+          </div>
+        `;
+        container.appendChild(postElement);
+      });
+    })
+    .catch(error => console.error('Error fetching posts:', error));
+}
     </script>
 </body>
 </html>

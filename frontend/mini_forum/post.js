@@ -21,10 +21,10 @@ function fetchPost(postId) {
             const container = document.getElementById('post-container');
             if (post) {
                 container.innerHTML = `
-                    <href = "stylesh
-                    <h3>${post.name}</h3>
-                    <p>${post.content}</p>
-                    <small>${new Date(post.created_at).toLocaleString()}</small>
+                    
+                    <h3><i class="fas fa-user-circle"></i> ${post.name}</h3>
+                    <p><i class="fas fa-quote-left"></i> ${post.content}</p>
+                    <small><i class="far fa-clock"></i> ${new Date(post.created_at).toLocaleString()}</small>
                 `;
             } else {
                 container.innerHTML = '<p>Post not found.</p>';
@@ -48,7 +48,7 @@ function fetchComments(postId) {
                         <h4>${comment.name}</h4>
                         <p>${comment.content}</p>
                         <small>${new Date(comment.created_at).toLocaleString()}</small>
-                        ${comment.student_id === currentStudentId ? `<button class= "cta-button" onclick="deleteComment(${comment.id})">Delete</button>` : ''}
+                        ${comment.student_id === currentStudentId ? `<button class="cta-button" onclick="deleteComment(${comment.id})"><i class="fas fa-trash-alt"></i>  Delete</button>` : ''}
                     `;
                     container.appendChild(commentElement);
                 });

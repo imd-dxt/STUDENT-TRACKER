@@ -24,3 +24,8 @@ cd student-tracker
 
 ### for chart js dependency
 install it using npm install char.js
+```
+## Colaborators
+Made by: Youssef 
+         Imad 
+    

@@ -17,12 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'aziliyoussef2003@gmail.com'; // Your Gmail address
-        $mail->Password = 'ddaa rovf wwue exxo'; // Your Gmail password
+        $mail->Username = 'aziliyoussef2003@gmail.com'; 
+        $mail->Password = 'ddaa rovf wwue exxo'; 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-        // Disable SSL certificate verification (temporary workaround)
+        // Disable SSL certificate verification (no money to  pay for that certificate hh) 
         $mail->SMTPOptions = array(
             'ssl' => array(
                 'verify_peer' => false,
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Recipients
         $mail->setFrom($email, $name);
-        $mail->addAddress('aziliyoussef2003@gmail.com'); // Recipient's email address
+        $mail->addAddress('aziliyoussef2003@gmail.com'); 
 
         // Content
         $mail->isHTML(false);
